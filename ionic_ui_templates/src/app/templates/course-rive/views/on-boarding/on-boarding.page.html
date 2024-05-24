@@ -5,15 +5,16 @@
     alt="Spline background for blur effect"
   ></ion-img>
 
-  <canvas
-    riv="shapes"
-    class="rive-bg"
-    [width]="platform.width()"
-    [height]="platform.height()"
-    *ngIf="showRiveAsset"
-  >
-    <riv-animation name="Animation 1" play></riv-animation>
-  </canvas>
+  @if (showRiveAsset) {
+    <canvas
+      riv="shapes"
+      class="rive-bg"
+      [width]="platform.width()"
+      [height]="platform.height()"
+      >
+      <riv-animation name="Animation 1" play></riv-animation>
+    </canvas>
+  }
 
   <!-- Main Content -->
   <div #container class="content-container">
@@ -32,13 +33,14 @@
     <ion-buttons class="startCoursebtn" (click)="startCoursePressed()">
       <div class="contained shadow"></div>
       <canvas class="contained" riv="button" width="236" height="64">
-        <riv-player
-          name="active"
-          [(play)]="buttonToggle"
-          autoreset
-          mode="one-shot"
-          *ngIf="showRiveAsset"
-        ></riv-player>
+        @if (showRiveAsset) {
+          <riv-player
+            name="active"
+            [(play)]="buttonToggle"
+            autoreset
+            mode="one-shot"
+          ></riv-player>
+        }
       </canvas>
       <div class="contained btnContent">
         <ion-icon class="arrow" name="arrow-forward-outline"></ion-icon>
@@ -60,7 +62,7 @@
     backdropDismiss="false"
     [enterAnimation]="enterAnimation"
     [leaveAnimation]="leaveAnimation"
-  >
+    >
     <ng-template>
       <div class="ion-page">
         <cr-sign-in (onClose)="onSignInClose()"></cr-sign-in>

@@ -16,7 +16,7 @@
   <div
     class="other-tabs"
     [ngStyle]="{ display: selectedTab.id === tabItems[0].id ? 'none' : 'flex' }"
-  >
+    >
     <ion-text class="font-title">
       {{selectedTab.artboard.toLowerCase()}}
     </ion-text>
@@ -28,19 +28,20 @@
 </div>
 
 <!-- Menu button -->
-<canvas
-  #menuToggleBtn
-  class="side-menu-button"
-  riv="menu_button"
-  width="44"
-  height="44"
-  (click)="onMenuToggle()"
-  *ngIf="showRiveMenuBtn"
->
-  <riv-state-machine name="State Machine" play>
-    <riv-input name="isOpen" [value]="isMenuOpen"></riv-input>
-  </riv-state-machine>
-</canvas>
+@if (showRiveMenuBtn) {
+  <canvas
+    #menuToggleBtn
+    class="side-menu-button"
+    riv="menu_button"
+    width="44"
+    height="44"
+    (click)="onMenuToggle()"
+    >
+    <riv-state-machine name="State Machine" play>
+      <riv-input name="isOpen" [value]="isMenuOpen"></riv-input>
+    </riv-state-machine>
+  </canvas>
+}
 
 <!-- White background behind tab bar that partially shows the tab content -->
 <div #tabWhiteBg class="tabs-white-underlay"></div>
